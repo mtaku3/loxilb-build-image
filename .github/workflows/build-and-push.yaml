@@ -2,10 +2,16 @@ name: Build and push
 
 on:
   workflow_dispatch:
+    inputs:
+      TAG:
+        required: true
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.TAG }}
+      DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
     steps:
       -
         name: Login to Docker Hub
