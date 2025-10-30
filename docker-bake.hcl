@@ -13,6 +13,7 @@ target "loxilb" {
   }
   args = {
     TAG = TAG
+    BUILDKIT_CONTEXT_KEEP_GIT_DIR = "1"
   }
   tags = ["docker.io/${DOCKERHUB_USERNAME}/loxilb:${TAG}"]
 }
@@ -28,5 +29,8 @@ target "loxilb" {
 
 target "kube-loxilb" {
   context = "https://github.com/loxilb-io/kube-loxilb.git#${TAG}"
+  args = {
+    BUILDKIT_CONTEXT_KEEP_GIT_DIR = "1"
+  }
   tags = ["docker.io/${DOCKERHUB_USERNAME}/kube-loxilb:${TAG}"]
 }
