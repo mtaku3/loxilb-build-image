@@ -41,7 +41,7 @@ jobs:
         with:
           push: true
           context: ./loxilb
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/loxilb:${{ github.event.inputs.TAG }}
+          tags: "${{ vars.DOCKERHUB_USERNAME }}/loxilb:${{ github.event.inputs.TAG }}"
           build-args:
             TAG: ${{ github.event.inputs.TAG }}
             BUILDKIT_CONTEXT_KEEP_GIT_DIR: 1
@@ -76,7 +76,7 @@ jobs:
         with:
           push: true
           context: ./loxilb
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/loxilb:${{ github.event.inputs.TAG }}-debug
+          tags: "${{ vars.DOCKERHUB_USERNAME }}/loxilb:${{ github.event.inputs.TAG }}-debug"
           build-args:
             TAG: ${{ github.event.inputs.TAG }}
             BUILDKIT_CONTEXT_KEEP_GIT_DIR: 1
@@ -112,6 +112,6 @@ jobs:
         with:
           push: true
           context: ./kube-loxilb
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/kube-loxilb:${{ github.event.inputs.TAG }}
+          tags: "${{ vars.DOCKERHUB_USERNAME }}/kube-loxilb:${{ github.event.inputs.TAG }}"
           build-args:
             BUILDKIT_CONTEXT_KEEP_GIT_DIR: 1
