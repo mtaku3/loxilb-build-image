@@ -13,7 +13,7 @@ ENV PATH="${PATH}:/usr/local/go/bin"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/"
 
 RUN mkdir -p /root/loxilb-io/loxilb
-COPY --from=src . /root/loxilb-io/loxilb/
+COPY . /root/loxilb-io/loxilb/
 
 # Create directories
 RUN mkdir -p /opt/loxilb \
