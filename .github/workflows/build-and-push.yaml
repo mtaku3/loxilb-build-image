@@ -15,7 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Clone
+        name: Checkout
+        uses: actions/checkout@v5
+        with:
+          path: loxilb-build-image
+      -
+        name: Clone loxilb
         uses: actions/checkout@v5
         with:
           repository: loxilb-io/loxilb
@@ -38,7 +43,7 @@ jobs:
       - 
         name: Overwrite Dockerfile
         run: |
-          cp loxilb.Dockerfile loxilb/Dockerfile
+          cp loxilb-build-image/loxilb.Dockerfile loxilb/Dockerfile
       -
         name: Build and push
         uses: docker/build-push-action@v6
@@ -54,7 +59,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Clone
+        name: Checkout
+        uses: actions/checkout@v5
+        with:
+          path: loxilb-build-image
+      -
+        name: Clone loxilb
         uses: actions/checkout@v5
         with:
           repository: loxilb-io/loxilb
@@ -77,7 +87,7 @@ jobs:
       - 
         name: Overwrite Dockerfile
         run: |
-          cp loxilb.Dockerfile loxilb/Dockerfile
+          cp loxilb-build-image/loxilb.Dockerfile loxilb/Dockerfile
       -
         name: Build and push
         uses: docker/build-push-action@v6
