@@ -73,19 +73,31 @@ RUN git clone https://github.com/loxilb-io/loxicmd.git && \
 RUN /usr/local/sbin/loxicmd completion bash > /etc/bash_completion.d/loxi_completion
 
 # Install loxilb
-RUN cd /root/loxilb-io/loxilb/ && git fetch --all --tags && git checkout $TAG && \
-    cd loxilb-ebpf && git fetch --all --tags && git checkout $TAG && cd .. && \
+RUN cd /root/loxilb-io/loxilb/ && \
+    git fetch --all --tags && \
+    git checkout $TAG && \
+    cd loxilb-ebpf && \
+    git fetch --all --tags && \
+    git checkout $TAG && \
+    cd .. && \
     go get . && \
-    arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
-    if [ "$arch" = "arm64" ]; then DOCKER_BUILDX_ARM64=true make; else make; fi && \
+    arch=$(arch | sed 's/aarch64/arm64/' | sed 's/x86_64/amd64/') && \
+    if [ "$arch" = "arm64" ]; then \
+        DOCKER_BUILDX_ARM64=true make build EXTRA_CFLAGS="${EXTRA_CFLAGS}"; \
+    else \
+        make build EXTRA_CFLAGS="${EXTRA_CFLAGS}"; \
+    fi && \
     cp loxilb-ebpf/utils/mkllb_bpffs.sh /usr/local/sbin/mkllb_bpffs && \
     cp tools/k8s/mkllb-url /usr/local/sbin/mkllb-url && \
     cp loxilb-ebpf/utils/mkllb_cgroup.sh /usr/local/sbin/mkllb_cgroup && \
     cp loxilb-ebpf/kernel/loxilb_dp_debug /usr/local/sbin/loxilb_dp_debug && \
     cp /root/loxilb-io/loxilb/loxilb /usr/local/sbin/loxilb && \
-    rm -fr /root/loxilb-io/loxilb/* /root/loxilb-io/loxilb/.git /root/loxilb-io/loxilb/.github && \
+    rm -rf /root/loxilb-io/loxilb/* \
+           /root/loxilb-io/loxilb/.git \
+           /root/loxilb-io/loxilb/.github && \
     mkdir -p /root/loxilb-io/loxilb/ && \
-    cp /usr/local/sbin/loxilb /root/loxilb-io/loxilb/loxilb && rm /usr/local/sbin/loxilb
+    cp /usr/local/sbin/loxilb /root/loxilb-io/loxilb/loxilb && \
+    rm /usr/local/sbin/loxilb
 
 # Install gobgp
 RUN arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
