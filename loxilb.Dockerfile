@@ -74,8 +74,8 @@ RUN /usr/local/sbin/loxicmd completion bash > /etc/bash_completion.d/loxi_comple
 
 # Install loxilb
 RUN cd /root/loxilb-io/loxilb/ && \
-    git fetch --all --tags && \
-    git checkout $TAG && \
+    # git fetch --all --tags && \
+    # git checkout $TAG && \
     cd loxilb-ebpf && \
     git fetch --all --tags && \
     git checkout $TAG && \
