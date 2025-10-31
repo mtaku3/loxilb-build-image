@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ARG TAG=main
 
-ARG EXTRA_CFLAGS=""
+ARG CFLAGS_ALL=""
 
 # Env variables
 ENV PATH="${PATH}:/usr/local/go/bin"
@@ -83,9 +83,9 @@ RUN cd /root/loxilb-io/loxilb/ && \
     go get . && \
     arch=$(arch | sed 's/aarch64/arm64/' | sed 's/x86_64/amd64/') && \
     if [ "$arch" = "arm64" ]; then \
-        DOCKER_BUILDX_ARM64=true make build EXTRA_CFLAGS="${EXTRA_CFLAGS}"; \
+        DOCKER_BUILDX_ARM64=true CFLAGS_ALL=${CFLAGS_ALL} make build; \
     else \
-        make build EXTRA_CFLAGS="${EXTRA_CFLAGS}"; \
+        CFLAGS_ALL=${CFLAGS_ALL} make build; \
     fi && \
     cp loxilb-ebpf/utils/mkllb_bpffs.sh /usr/local/sbin/mkllb_bpffs && \
     cp tools/k8s/mkllb-url /usr/local/sbin/mkllb-url && \

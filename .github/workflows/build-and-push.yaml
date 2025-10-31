@@ -54,6 +54,7 @@ jobs:
           build-args: |
             TAG=${{ github.event.inputs.TAG }}
             BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
+            CFLAGS_ALL="-DHAVE_DP_FC=1 -DHAVE_DP_EXTCT=1 -DHAVE_DP_SCTP_SUM=1 -DHAVE_DP_CT_SYNC=1 -DMAX_REAL_CPUS=16 -DHAVE_DP_RSS=1 -DHAVE_DP_PERSIST_TFC=1 -DHAVE_DP_FW=1"
 
   loxilb-debug:
     runs-on: ubuntu-latest
@@ -98,7 +99,7 @@ jobs:
           build-args: |
             TAG=${{ github.event.inputs.TAG }}
             BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
-            EXTRA_CFLAGS="-DHAVE_DP_LOG_LVL_TRACE"
+            CFLAGS_ALL="-DHAVE_DP_FC=1 -DHAVE_DP_EXTCT=1 -DHAVE_DP_SCTP_SUM=1 -DHAVE_DP_CT_SYNC=1 -DMAX_REAL_CPUS=16 -DHAVE_DP_RSS=1 -DHAVE_DP_PERSIST_TFC=1 -DHAVE_DP_FW=1 -DHAVE_DP_LOG_LVL_TRACE"
 
   kube-loxilb:
     runs-on: ubuntu-latest
