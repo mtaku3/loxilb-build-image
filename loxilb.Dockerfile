@@ -119,9 +119,9 @@ RUN echo "if [ -f /etc/bash_completion ] && ! shopt -oq posix; then" >> /root/.b
     echo "fi" >> /root/.bashrc
 
 # Optional files, only apply when files exist
-# COPY ./loxilb.rep* /root/loxilb-io/loxilb/loxilb
-# COPY ./llb_ebpf_main.o.rep* /opt/loxilb/llb_ebpf_main.o
-# COPY ./llb_xdp_main.o.rep* /opt/loxilb/llb_xdp_main.o
+COPY ./loxilb.rep* /root/loxilb-io/loxilb/loxilb
+COPY ./llb_ebpf_main.o.rep* /opt/loxilb/llb_ebpf_main.o
+COPY ./llb_xdp_main.o.rep* /opt/loxilb/llb_xdp_main.o
 
 FROM ubuntu:22.04
 
